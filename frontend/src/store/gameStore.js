@@ -409,6 +409,63 @@ export const useGameStore = create(
           remaining: state.fishPerLevel,
         });
       },
+      
+      // Add fish to tacklebox (for breeding results)
+      addFishToTacklebox: (fish) => {
+        const state = get();
+        const newFish = {
+          id: fish.id || `fish_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          name: fish.name,
+          color: fish.color || '#FFD700',
+          size: fish.actualSize || fish.size || 20,
+          rarity: fish.rarity || 0,
+          points: fish.points || 10,
+          caughtAt: fish.caughtAt || new Date().toISOString(),
+          bred: fish.bred || false,
+          special: fish.special || false,
+        };
+        
+        set({
+          tacklebox: {
+            ...state.tacklebox,
+            items: [...(state.tacklebox?.items || []), newFish],
+            totalFishCaught: (state.tacklebox?.totalFishCaught || 0) + 1,
+          }
+        });
+      },
+      
+      // Get tacklebox statistics
+      getTackleboxStats: () => {
+        const state = get();
+        const items = state.tacklebox?.items || [];
+        const fishByType = {};
+        let rareFishCount = 0;
+        
+        items.forEach(fish => {
+          fishByType[fish.name] = (fishByType[fish.name] || 0) + 1;
+          if (fish.rarity >= 2) rareFishCount++;
+        });
+        
+        return {
+          totalFishCaught: items.length,
+          uniqueTypes: Object.keys(fishByType).length,
+          rareFishCount,
+          totalItems: items.length,
+          fishByType,
+        };
+      },
+      
+      // Unlock achievement
+      unlockAchievement: (achievementId) => {
+        const state = get();
+        if (!state.achievements.includes(achievementId)) {
+          set({
+            achievements: [...state.achievements, achievementId]
+          });
+          return true;
+        }
+        return false;
+      },
     }),
     {
       name: 'fishing-game-storage',
