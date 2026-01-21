@@ -951,6 +951,39 @@ function App() {
                 <span>DAILY</span>
               </button>
             </div>
+            
+            {/* Second row of feature buttons */}
+            <div className="flex gap-2 mt-2">
+              {/* MINI GAMES */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowMiniGames(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-500 hover:to-teal-500 border-2 border-green-400/50 shadow-lg transition-all"
+                data-testid="minigames-button"
+              >
+                <span className="text-lg">🎮</span>
+                <span>GAMES</span>
+              </button>
+              
+              {/* WEATHER */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowWeather(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 border-2 border-sky-400/50 shadow-lg transition-all"
+                data-testid="weather-button"
+              >
+                <span className="text-lg">🌤️</span>
+                <span>WEATHER</span>
+              </button>
+              
+              {/* ACHIEVEMENTS */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowAchievements(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 border-2 border-yellow-400/50 shadow-lg transition-all"
+                data-testid="achievements-button"
+              >
+                <span className="text-lg">🏆</span>
+                <span>TROPHIES</span>
+              </button>
+            </div>
           </div>
           
           {/* Stats Banner */}
