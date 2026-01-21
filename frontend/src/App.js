@@ -1148,6 +1148,38 @@ function App() {
         {showDailyRewards && (
           <DailyLoginRewards onClose={() => setShowDailyRewards(false)} />
         )}
+        
+        {/* Mini Games Modal */}
+        {showMiniGames && (
+          <MiniGamesLauncher 
+            onClose={() => setShowMiniGames(false)} 
+            onGameComplete={(bonus) => {
+              store.addScore(bonus);
+              toast.success(`+${bonus} bonus points!`);
+            }}
+          />
+        )}
+        
+        {/* Weather Widget Modal */}
+        {showWeather && (
+          <WeatherWidget onClose={() => setShowWeather(false)} />
+        )}
+        
+        {/* Achievements List Modal */}
+        {showAchievements && (
+          <AchievementList 
+            unlockedAchievements={store.achievements || []}
+            onClose={() => setShowAchievements(false)}
+          />
+        )}
+        
+        {/* Achievement Unlock Animation */}
+        {achievementToShow && (
+          <AchievementUnlockAnimation 
+            achievement={achievementToShow}
+            onComplete={() => setAchievementToShow(null)}
+          />
+        )}
       </div>
     );
   }
