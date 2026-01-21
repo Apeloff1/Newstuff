@@ -1,34 +1,1838 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== GO FISH! - PREMIUM FISHING GAME UI ========== */
+/* ========== 70+ POLISH IMPROVEMENTS FOR PUBLISH-READY STATUS ========== */
+
+/* Import fonts - using a friendly, readable font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;600;700;900&family=VT323&family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 25% 6%;
+    --foreground: 45 100% 60%;
+    --card: 220 25% 10%;
+    --card-foreground: 45 100% 60%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 220 25% 6%;
+    --secondary: 200 85% 55%;
+    --accent: 150 80% 50%;
+    --destructive: 0 80% 55%;
+    --border: 45 100% 50%;
+    --ring: 45 100% 50%;
+    --radius: 0.75rem;
+    
+    /* Custom colors - polished palette */
+    --ocean-deep: #0a1628;
+    --ocean-mid: #1a3a5c;
+    --ocean-light: #2a6090;
+    --gold: #ffd700;
+    --gold-dark: #b8860b;
+    --neon-blue: #00d4ff;
+    --neon-green: #00ff88;
+    --neon-pink: #ff0080;
+    --success: #22c55e;
+    --warning: #eab308;
+    --danger: #ef4444;
+  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+@layer base {
+  * {
+    @apply border-border;
+    /* Smooth scrolling everywhere */
+    scroll-behavior: smooth;
+    /* Better text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Fredoka', 'Orbitron', sans-serif;
+    overflow: hidden;
+    /* Prevent text selection on buttons */
+    user-select: none;
+    -webkit-user-select: none;
+    /* Better touch behavior */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Improved focus states for accessibility */
+  :focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Pixel font */
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.03em;
+  /* Crisp pixel rendering */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.App-link {
-    color: #61dafb;
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scalePop {
+  0% { transform: scale(0.7); opacity: 0; }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 8px var(--gold), 0 0 16px var(--gold); 
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold), 0 0 60px var(--gold); 
+    filter: brightness(1.15);
+  }
+}
+
+@keyframes textShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px) rotate(-3deg); }
+  75% { transform: translateX(6px) rotate(3deg); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fishSwim {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  25% { transform: translateX(12px) scaleX(1); }
+  50% { transform: translateX(0) scaleX(1); }
+  75% { transform: translateX(-12px) scaleX(1); }
+}
+
+@keyframes fishToBox {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: translate(-40vw, 15vh) scale(0.6) rotate(20deg); opacity: 0.8; }
+  100% { transform: translate(-45vw, 35vh) scale(0.15) rotate(45deg); opacity: 0; }
+}
+
+@keyframes menuSlideIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes backdropFade {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to { opacity: 1; backdrop-filter: blur(12px); }
+}
+
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.85) translateY(30px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes scorePop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); color: #00ff88; }
+  100% { transform: scale(1); }
+}
+
+@keyframes loadingBar {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes waveSlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes waveMedium {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-30%); }
+}
+
+/* Animation classes */
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
+.animate-slide-down { animation: slideDown 0.6s ease-out forwards; }
+.animate-scale-pop { animation: scalePop 0.5s ease-out forwards; }
+.animate-float { animation: gentleFloat 3.5s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 0.35s ease-in-out infinite; }
+.animate-shake { animation: shake 0.12s ease-in-out infinite; }
+.animate-bob { animation: bob 2.5s ease-in-out infinite; }
+.animate-fish-swim { animation: fishSwim 1.8s ease-in-out infinite; }
+.animate-fish-to-box { animation: fishToBox 0.9s ease-in-out forwards; }
+.animate-score-pop { animation: scorePop 0.35s ease-out; }
+.animate-backdrop { animation: backdropFade 0.35s ease-out forwards; }
+.animate-modal { animation: modalPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-loading-bar { animation: loadingBar 1.5s ease-out forwards; }
+.animate-wave-slow { animation: waveSlow 12s linear infinite; }
+.animate-wave-medium { animation: waveMedium 8s linear infinite; }
+
+/* Staggered menu items */
+.menu-item-1 { animation: menuSlideIn 0.5s ease-out 0.1s forwards; opacity: 0; }
+.menu-item-2 { animation: menuSlideIn 0.5s ease-out 0.2s forwards; opacity: 0; }
+.menu-item-3 { animation: menuSlideIn 0.5s ease-out 0.3s forwards; opacity: 0; }
+.menu-item-4 { animation: menuSlideIn 0.5s ease-out 0.4s forwards; opacity: 0; }
+
+/* ========== UI COMPONENTS ========== */
+
+/* Glass morphism panels */
+.glass-panel {
+  background: rgba(10, 22, 40, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #ffd700 0%, #ffec8b 20%, #ffd700 40%, #ffb800 60%, #ffd700 80%, #ffe44d 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s linear infinite;
+}
+
+/* Logo glow */
+.logo-glow {
+  text-shadow: 
+    0 0 15px var(--gold),
+    0 0 30px var(--gold),
+    0 0 60px rgba(255, 215, 0, 0.5),
+    0 0 100px rgba(255, 215, 0, 0.3);
+}
+
+/* ========== MENU BUTTONS ========== */
+
+.menu-btn-primary {
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 40%, #16a34a 100%);
+  border: 3px solid #fff;
+  box-shadow: 
+    0 6px 0 #15803d,
+    0 8px 20px rgba(34, 197, 94, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.menu-btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 10px 0 #15803d,
+    0 12px 30px rgba(34, 197, 94, 0.5);
+}
+
+.menu-btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 3px 0 #15803d,
+    0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.menu-btn-secondary {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 40%, #1d4ed8 100%);
+  border: 3px solid #93c5fd;
+  box-shadow: 
+    0 5px 0 #1e40af,
+    0 7px 18px rgba(59, 130, 246, 0.35);
+  transition: all 0.2s ease;
+}
+
+.menu-btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 0 #1e40af,
+    0 10px 25px rgba(59, 130, 246, 0.45);
+}
+
+.menu-btn-accent {
+  background: linear-gradient(180deg, #a855f7 0%, #9333ea 40%, #7c3aed 100%);
+  border: 3px solid #c4b5fd;
+  box-shadow: 0 5px 0 #5b21b6;
+  transition: all 0.2s ease;
+}
+
+.menu-btn-accent:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 #5b21b6;
+}
+
+.menu-btn-neutral {
+  background: linear-gradient(180deg, #6b7280 0%, #4b5563 40%, #374151 100%);
+  border: 3px solid #9ca3af;
+  box-shadow: 0 5px 0 #1f2937;
+  transition: all 0.2s ease;
+}
+
+.menu-btn-neutral:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 #1f2937;
+}
+
+/* ========== GAME CONTROLS ========== */
+
+.btn-cast {
+  background: radial-gradient(circle at 35% 35%, #4ade80 0%, #22c55e 45%, #16a34a 100%);
+  border: 5px solid #fff;
+  box-shadow: 
+    0 8px 0 #14532d,
+    0 0 30px rgba(74, 222, 128, 0.5),
+    0 0 60px rgba(74, 222, 128, 0.25),
+    inset 0 3px 6px rgba(255, 255, 255, 0.35),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-cast:hover:not(:disabled) {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 
+    0 13px 0 #14532d,
+    0 0 45px rgba(74, 222, 128, 0.7),
+    0 0 90px rgba(74, 222, 128, 0.35);
+}
+
+.btn-cast:active:not(:disabled) {
+  transform: translateY(4px) scale(0.96);
+  box-shadow: 
+    0 4px 0 #14532d,
+    0 0 20px rgba(74, 222, 128, 0.5);
+}
+
+.btn-cast:disabled {
+  background: radial-gradient(circle at 35% 35%, #6b7280 0%, #4b5563 45%, #374151 100%);
+  box-shadow: 0 5px 0 #1f2937;
+  cursor: not-allowed;
+}
+
+.btn-reel {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 45%, #2563eb 100%);
+  border: 4px solid #fff;
+  box-shadow: 
+    0 5px 0 #1d4ed8,
+    0 0 25px rgba(59, 130, 246, 0.6),
+    0 0 50px rgba(59, 130, 246, 0.35);
+  animation: pulseGlow 0.6s ease-in-out infinite;
+}
+
+/* ========== STATS & PROGRESS ========== */
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(20, 35, 60, 0.85) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 10px;
+  padding: 10px 14px;
+  backdrop-filter: blur(6px);
+}
+
+.progress-bar {
+  height: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 50%, #86efac 100%);
+  border-radius: 6px;
+  transition: width 0.4s ease-out;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+}
+
+/* Tension bar */
+.tension-bar {
+  height: 14px;
+  background: linear-gradient(90deg, 
+    rgba(34, 197, 94, 0.3) 0%, 
+    rgba(34, 197, 94, 0.3) 40%,
+    rgba(234, 179, 8, 0.3) 40%,
+    rgba(234, 179, 8, 0.3) 70%,
+    rgba(239, 68, 68, 0.3) 70%,
+    rgba(239, 68, 68, 0.3) 100%
+  );
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.tension-fill {
+  height: 100%;
+  transition: width 0.2s ease-out, background-color 0.2s ease;
+  border-radius: 6px;
+}
+
+.tension-safe { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.tension-warning { background: linear-gradient(90deg, #eab308, #facc15); }
+.tension-danger { 
+  background: linear-gradient(90deg, #ef4444, #f87171); 
+  animation: shake 0.12s infinite; 
+}
+
+/* ========== EQUIPMENT ========== */
+
+.equip-btn {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+}
+
+.equip-btn:hover {
+  transform: scale(1.15);
+  border-color: var(--gold);
+}
+
+.equip-btn.active {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #000;
+  border-color: #fff;
+  box-shadow: 0 0 15px var(--gold);
+}
+
+.equip-btn.locked {
+  opacity: 0.45;
+  cursor: pointer;
+}
+
+/* ========== TACKLEBOX ========== */
+
+.tacklebox-sprite {
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+}
+
+.tacklebox-sprite:hover {
+  transform: scale(1.15) rotate(-8deg);
+}
+
+.fish-grid-item {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 10px;
+  transition: all 0.25s ease;
+}
+
+.fish-grid-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 6px 18px rgba(255, 215, 0, 0.25);
+}
+
+.fish-grid-item.unlocked {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(20, 45, 70, 0.65);
+}
+
+/* ========== LEADERBOARD ========== */
+
+.leaderboard-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(20, 35, 60, 0.65) 100%);
+  border-radius: 10px;
+  border-left: 4px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.leaderboard-entry:hover {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, rgba(20, 35, 60, 0.85) 100%);
+  border-left-color: var(--gold);
+  transform: translateX(6px);
+}
+
+.leaderboard-entry.top-3 {
+  border-left-color: var(--gold);
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, rgba(20, 35, 60, 0.75) 100%);
+}
+
+/* ========== ACHIEVEMENTS ========== */
+
+.achievement-badge {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transition: all 0.35s ease;
+  border: 4px solid transparent;
+}
+
+.achievement-badge.locked {
+  background: rgba(0, 0, 0, 0.55);
+  filter: grayscale(1) opacity(0.4);
+}
+
+.achievement-badge.unlocked {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.35) 0%, rgba(88, 28, 135, 0.55) 100%);
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.45);
+}
+
+.achievement-badge:hover {
+  transform: scale(1.2) rotate(8deg);
+}
+
+/* ========== GAME ELEMENTS ========== */
+
+.bobber {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+  transition: transform 0.12s ease;
+}
+
+.bobber.active {
+  animation: shake 0.12s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 100, 100, 0.9));
+}
+
+.caught-fish {
+  animation: scalePop 0.5s ease-out, gentleFloat 2.5s ease-in-out 0.5s infinite;
+}
+
+.game-message {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(20, 35, 60, 0.96) 100%);
+  border: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 14px 28px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.55),
+    0 0 25px rgba(255, 215, 0, 0.25);
+  animation: scalePop 0.35s ease-out;
+}
+
+/* ========== SPRITE ANIMATIONS ========== */
+
+/* GPU Acceleration */
+.gpu-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.will-change-transform {
+  will-change: transform, opacity;
+}
+
+.sky-transition {
+  transition: background 2s ease-in-out;
+}
+
+/* ========== SUN ANIMATIONS ========== */
+.sun-container {
+  transition: opacity 1s ease-in-out;
+}
+
+.sun-rotate {
+  animation: sunRotate 60s linear infinite;
+}
+
+.sun-ray {
+  animation: sunRayPulse 3s ease-in-out infinite;
+  transform-origin: 45px 45px;
+}
+
+@keyframes sunRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sunRayPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* ========== MOON ANIMATIONS ========== */
+.moon-container {
+  transition: opacity 1s ease-in-out;
+}
+
+.moon-glow {
+  animation: moonGlow 4s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(245, 245, 220, 0.3)); }
+  50% { filter: drop-shadow(0 0 25px rgba(245, 245, 220, 0.5)); }
+}
+
+/* ========== STAR ANIMATIONS ========== */
+.star-twinkle {
+  animation: starTwinkle ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ========== CLOUD ANIMATIONS (Smooth CSS) ========== */
+.cloud-float {
+  animation: cloudFloat linear infinite;
+  left: -200px;
+}
+
+@keyframes cloudFloat {
+  from { transform: translateX(0) scale(var(--scale, 0.3)); }
+  to { transform: translateX(calc(100vw + 400px)) scale(var(--scale, 0.3)); }
+}
+
+/* ========== SEAGULL ANIMATIONS ========== */
+.seagull-fly {
+  animation: seagullFly linear infinite;
+  left: -60px;
+}
+
+.seagull-fly.seagull-left {
+  animation: seagullFlyLeft linear infinite;
+  left: auto;
+  right: -60px;
+}
+
+.seagull-wings {
+  animation: wingFlap ease-in-out infinite;
+}
+
+.wing-left, .wing-right {
+  transform-origin: 20px 11px;
+  animation: wingMove ease-in-out infinite;
+}
+
+@keyframes seagullFly {
+  from { transform: translateX(0) translateY(0); }
+  to { transform: translateX(calc(100vw + 120px)) translateY(0); }
+}
+
+@keyframes seagullFlyLeft {
+  from { transform: translateX(0) scaleX(-1); }
+  to { transform: translateX(calc(-100vw - 120px)) scaleX(-1); }
+}
+
+@keyframes wingFlap {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.85); }
+}
+
+@keyframes wingMove {
+  0%, 100% { d: path('M 20 11 Q 12 6 4 4'); }
+  50% { d: path('M 20 11 Q 12 14 4 16'); }
+}
+
+/* ========== ISLAND ANIMATIONS ========== */
+.island-bob {
+  animation: islandBob 4s ease-in-out infinite;
+}
+
+.palm-sway {
+  animation: palmSway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.palm-sway-small {
+  animation: palmSwaySmall 2.8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.palm-leaf {
+  animation: leafSway 3.5s ease-in-out infinite;
+}
+
+.ripple-1 {
+  animation: rippleExpand 3s ease-in-out infinite;
+}
+
+.ripple-2 {
+  animation: rippleExpand 3s ease-in-out infinite 0.5s;
+}
+
+@keyframes islandBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes palmSway {
+  0%, 100% { transform: rotate(0deg) skewX(0deg); }
+  25% { transform: rotate(1.5deg) skewX(1deg); }
+  75% { transform: rotate(-1.5deg) skewX(-1deg); }
+}
+
+@keyframes palmSwaySmall {
+  0%, 100% { transform: rotate(0deg); }
+  33% { transform: rotate(2deg); }
+  66% { transform: rotate(-2deg); }
+}
+
+@keyframes leafSway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes rippleExpand {
+  0%, 100% { transform: scaleX(1); opacity: 0.2; }
+  50% { transform: scaleX(1.08); opacity: 0.35; }
+}
+
+/* ========== WATER ANIMATIONS ========== */
+.water-container {
+  overflow: hidden;
+}
+
+.wave-layer-1 {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.03) 25%,
+    transparent 50%
+  );
+  background-size: 200px 100%;
+  animation: waveMove1 8s linear infinite;
+}
+
+.wave-layer-2 {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.025) 30%,
+    transparent 60%
+  );
+  background-size: 150px 100%;
+  animation: waveMove2 6s linear infinite;
+}
+
+.wave-layer-3 {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.02) 35%,
+    transparent 70%
+  );
+  background-size: 100px 100%;
+  animation: waveMove3 4s linear infinite;
+}
+
+.water-sparkle {
+  width: 4px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: waterSparkle 2.5s ease-in-out infinite;
+}
+
+.water-shine {
+  background: linear-gradient(170deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+  animation: waterShine 6s ease-in-out infinite;
+}
+
+.fish-swim {
+  animation: fishSwim linear infinite;
+  left: -50px;
+}
+
+@keyframes waveMove1 {
+  from { background-position-x: 0; }
+  to { background-position-x: 200px; }
+}
+
+@keyframes waveMove2 {
+  from { background-position-x: 0; }
+  to { background-position-x: -150px; }
+}
+
+@keyframes waveMove3 {
+  from { background-position-x: 0; }
+  to { background-position-x: 100px; }
+}
+
+@keyframes waterSparkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.5); }
+}
+
+@keyframes waterShine {
+  0%, 100% { transform: translateX(-30%); }
+  50% { transform: translateX(30%); }
+}
+
+@keyframes fishSwim {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 100px)); }
+}
+
+/* ========== BUBBLE ANIMATIONS ========== */
+.bubble-rise {
+  animation: bubbleRise ease-out infinite;
+}
+
+@keyframes bubbleRise {
+  0% { 
+    transform: translateY(0) translateX(0); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: translateY(-25vh) translateX(8px); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: translateY(-50vh) translateX(-5px); 
+    opacity: 0; 
+  }
+}
+
+/* ========== SNOWFLAKE SHIMMER ========== */
+.snowflake-shimmer {
+  animation: snowflakeShimmer 2s ease-in-out infinite;
+}
+
+@keyframes snowflakeShimmer {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ========== SEASONAL PARTICLES ========== */
+.particle-petal,
+.particle-leaf,
+.particle-snow,
+.particle-butterfly {
+  animation: particleFall linear infinite;
+  top: -20px;
+}
+
+.particle-snow {
+  animation: snowFall linear infinite;
+}
+
+.particle-leaf {
+  animation: particleFall linear infinite, leafRotate 3s linear infinite;
+}
+
+.leaf-spin {
+  animation: leafRotate 2s linear infinite;
+}
+
+.butterfly-flutter {
+  animation: butterflyFlutter 0.3s ease-in-out infinite;
+}
+
+@keyframes particleFall {
+  0% { 
+    transform: translateY(0) translateX(0); 
+    opacity: 0.9;
+  }
+  25% { 
+    transform: translateY(25vh) translateX(var(--sway, 15px)); 
+  }
+  50% { 
+    transform: translateY(50vh) translateX(calc(var(--sway, 15px) * -0.5)); 
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(75vh) translateX(var(--sway, 15px)); 
+  }
+  100% { 
+    transform: translateY(100vh) translateX(0); 
+    opacity: 0.8;
+  }
+}
+
+@keyframes snowFall {
+  0% { 
+    transform: translateY(0) translateX(0) rotate(0deg); 
+    opacity: 0.8;
+  }
+  25% { 
+    transform: translateY(25vh) translateX(var(--sway, 8px)) rotate(90deg); 
+  }
+  50% { 
+    transform: translateY(50vh) translateX(calc(var(--sway, 8px) * -0.7)) rotate(180deg); 
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(75vh) translateX(var(--sway, 8px)) rotate(270deg); 
+  }
+  100% { 
+    transform: translateY(100vh) translateX(0) rotate(360deg); 
+    opacity: 0.7;
+  }
+}
+
+@keyframes leafRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes butterflyFlutter {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(-1); }
+}
+
+/* ========== FIREFLY ANIMATIONS ========== */
+.firefly-float {
+  animation: fireflyFloat ease-in-out infinite;
+}
+
+.firefly-glow {
+  background: radial-gradient(circle, rgba(255,255,150,0.9) 0%, rgba(200,255,100,0.4) 50%, transparent 100%);
+  animation: fireflyGlow ease-in-out infinite;
+}
+
+@keyframes fireflyFloat {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(15px, -10px); }
+  50% { transform: translate(-10px, 5px); }
+  75% { transform: translate(8px, -15px); }
+}
+
+@keyframes fireflyGlow {
+  0%, 100% { opacity: 0.3; box-shadow: 0 0 5px rgba(255,255,100,0.3); }
+  50% { opacity: 1; box-shadow: 0 0 15px rgba(255,255,100,0.8); }
+}
+
+/* ========== SHOOTING STAR ========== */
+.shooting-star {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, white 50%, white 100%);
+  animation: shootingStar ease-out forwards;
+  box-shadow: 0 0 8px white;
+}
+
+@keyframes shootingStar {
+  0% { opacity: 0; transform: rotate(var(--angle, 25deg)) translateX(0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(var(--angle, 25deg)) translateX(150px); }
+}
+
+/* ========== LENS FLARE ========== */
+.lens-flare-container {
+  animation: lensFlareShimmer 3s ease-in-out infinite;
+}
+
+.lens-flare-main {
+  background: radial-gradient(circle, rgba(255,255,200,0.25) 0%, rgba(255,200,100,0.1) 40%, transparent 70%);
+  animation: lensFlarePulse 2s ease-in-out infinite;
+}
+
+.lens-flare-secondary {
+  background: radial-gradient(circle, rgba(255,180,100,0.2) 0%, transparent 70%);
+}
+
+.lens-flare-tertiary {
+  background: radial-gradient(circle, rgba(100,200,255,0.15) 0%, transparent 70%);
+}
+
+@keyframes lensFlareShimmer {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes lensFlarePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ========== RAIN EFFECT ========== */
+.rain-effect {
+  background-image: 
+    linear-gradient(180deg, rgba(180, 200, 255, 0.5) 0%, rgba(100, 150, 220, 0.2) 100%),
+    repeating-linear-gradient(
+      110deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(180, 200, 255, 0.3) 8px,
+      rgba(180, 200, 255, 0.3) 10px
+    );
+  background-size: 100% 100%, 20px 100%;
+  animation: rainFall 0.3s linear infinite;
+}
+
+@keyframes rainFall {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 50px, 10px 50px; }
+}
+
+.lightning-flash {
+  animation: lightningFlash 0.1s ease-out;
+}
+
+@keyframes lightningFlash {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+/* ========== BOAT & WHALE ========== */
+.boat-float {
+  animation: boatFloat linear infinite;
+  animation-duration: 40s;
+  left: -150px;
+}
+
+@keyframes boatFloat {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(25vw) translateY(-3px); }
+  50% { transform: translateX(50vw) translateY(0); }
+  75% { transform: translateX(75vw) translateY(-3px); }
+  100% { transform: translateX(calc(100vw + 200px)) translateY(0); }
+}
+
+.whale-swim {
+  animation: whaleSwim 35s linear forwards;
+  left: -200px;
+}
+
+.whale-tail {
+  animation: whaleTail 2s ease-in-out infinite;
+  transform-origin: 88px 42px;
+}
+
+.whale-spout {
+  animation: whaleSpout 4s ease-in-out infinite;
+}
+
+@keyframes whaleSwim {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(25vw) translateY(-6px); }
+  50% { transform: translateX(50vw) translateY(0); }
+  75% { transform: translateX(75vw) translateY(-6px); }
+  100% { transform: translateX(calc(100vw + 250px)) translateY(0); }
+}
+
+@keyframes whaleTail {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(8deg); }
+}
+
+@keyframes whaleSpout {
+  0%, 60%, 100% { opacity: 0; transform: scaleY(0); }
+  70%, 90% { opacity: 0.7; transform: scaleY(1); }
+}
+
+/* ========== FISH & BOBBER ========== */
+.fish-wiggle {
+  animation: fishWiggle 0.5s ease-in-out infinite;
+}
+
+/* Menu fish wiggle - more playful */
+.fish-wiggle {
+  animation: menuFishWiggle 0.8s ease-in-out infinite;
+}
+
+@keyframes menuFishWiggle {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  25% { transform: rotate(8deg) translateY(-5px); }
+  50% { transform: rotate(-8deg) translateY(0); }
+  75% { transform: rotate(8deg) translateY(5px); }
+}
+
+.bobber-bob {
+  animation: bobberBob 2.5s ease-in-out infinite;
+}
+
+.bobber-shake {
+  animation: bobberShake 0.1s ease-in-out infinite;
+}
+
+@keyframes fishWiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes bobberBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes bobberShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-4px) rotate(-3deg); }
+  75% { transform: translateX(4px) rotate(3deg); }
+}
+
+.splash-anim {
+  animation: splashAnim 0.5s ease-out forwards;
+}
+
+@keyframes splashAnim {
+  0% { opacity: 1; transform: scale(0.6); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.3) translateY(-15px); }
+}
+
+.particle-burst {
+  animation: particleBurst 0.6s ease-out forwards;
+}
+
+@keyframes particleBurst {
+  0% { opacity: 1; transform: scale(0.5); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+/* ========== NEURON ACTIVATION EFFECTS ========== */
+
+/* Screen shake on catch */
+.screen-shake {
+  animation: screenShake 0.3s ease-out;
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  10% { transform: translateX(-4px) translateY(-2px); }
+  20% { transform: translateX(4px) translateY(2px); }
+  30% { transform: translateX(-3px) translateY(-1px); }
+  40% { transform: translateX(3px) translateY(1px); }
+  50% { transform: translateX(-2px) translateY(-2px); }
+  60% { transform: translateX(2px) translateY(2px); }
+  70% { transform: translateX(-1px) translateY(-1px); }
+  80% { transform: translateX(1px) translateY(1px); }
+}
+
+/* Combo flash */
+.combo-flash {
+  animation: comboFlash 0.2s ease-out;
+}
+
+@keyframes comboFlash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.5) saturate(1.3); }
+  100% { filter: brightness(1); }
+}
+
+/* Streak fire mode */
+.streak-fire {
+  animation: streakFire 0.5s ease-out;
+}
+
+@keyframes streakFire {
+  0% { box-shadow: inset 0 0 0 rgba(255, 100, 0, 0); }
+  30% { box-shadow: inset 0 0 60px rgba(255, 100, 0, 0.3); }
+  100% { box-shadow: inset 0 0 0 rgba(255, 100, 0, 0); }
+}
+
+/* Rare catch glow */
+.rare-glow {
+  animation: rareGlow 1.5s ease-out;
+}
+
+@keyframes rareGlow {
+  0% { box-shadow: inset 0 0 0 rgba(200, 150, 255, 0); }
+  30% { box-shadow: inset 0 0 80px rgba(200, 150, 255, 0.4); }
+  100% { box-shadow: inset 0 0 0 rgba(200, 150, 255, 0); }
+}
+
+/* Points popup */
+.points-popup {
+  animation: pointsPopup 1.5s ease-out forwards;
+}
+
+@keyframes pointsPopup {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  15% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  30% { transform: translate(-50%, -50%) scale(1); }
+  70% { opacity: 1; transform: translate(-50%, -70%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -100%) scale(0.8); }
+}
+
+.perfect-glow {
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 40px rgba(255, 215, 0, 0.4);
+  animation: perfectGlow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes perfectGlow {
+  0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6); }
+  100% { text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5); }
+}
+
+/* Combo indicator */
+.combo-pulse {
+  animation: comboPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes comboPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.on-fire {
+  animation: onFire 0.3s ease-in-out infinite, comboPulse 0.5s ease-in-out infinite;
+  text-shadow: 
+    0 0 10px rgba(255, 100, 0, 0.9),
+    0 0 20px rgba(255, 50, 0, 0.7),
+    0 0 30px rgba(255, 150, 0, 0.5);
+}
+
+@keyframes onFire {
+  0%, 100% { filter: brightness(1) hue-rotate(0deg); }
+  50% { filter: brightness(1.2) hue-rotate(10deg); }
+}
+
+/* Satisfying button press */
+.btn-cast:active:not(:disabled),
+.btn-reel:active {
+  animation: buttonPress 0.15s ease-out;
+}
+
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+/* Progress bar fill satisfaction */
+.progress-fill {
+  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Score pop animation */
+.animate-score-pop {
+  animation: scorePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scorePop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); color: #4ade80; }
+  100% { transform: scale(1); }
+}
+
+/* Level up celebration */
+.level-up-celebration {
+  animation: levelUpCelebration 1s ease-out;
+}
+
+@keyframes levelUpCelebration {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.5) rotate(-10deg); 
+  }
+  30% { 
+    opacity: 1; 
+    transform: scale(1.2) rotate(5deg); 
+  }
+  50% { 
+    transform: scale(1) rotate(0deg); 
+  }
+  70% { 
+    transform: scale(1.05) rotate(-2deg); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotate(0deg); 
+  }
+}
+
+/* Hover sound trigger helper */
+.hover-sound:hover {
+  cursor: pointer;
+}
+
+/* Smooth transitions for all interactive elements */
+button, .interactive {
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.15s ease,
+              filter 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+/* Ultra-smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== DECORATIVE ELEMENTS ========== */
+
+.floating-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 215, 0, 0.7);
+  border-radius: 50%;
+  animation: sparkle 2.5s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.stage-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.stage-card:hover::before {
+  left: 100%;
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  border-radius: 4px;
+}
+
+/* ========== FISH ENCYCLOPEDIA STYLES ========== */
+
+.fish-dex-entry {
+  transition: all 0.2s ease;
+}
+
+.fish-dex-entry:hover {
+  transform: translateY(-2px);
+}
+
+/* ========== TUTORIAL STYLES ========== */
+
+.tutorial-card {
+  animation: tutorialPulse 2s ease-in-out infinite;
+}
+
+@keyframes tutorialPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.5); }
+}
+
+/* ========== BUTTON TEXT FIT - SMALLER FONTS ========== */
+
+.btn-cast {
+  font-size: 0.5rem !important;
+  line-height: 1.1;
+  padding: 2px;
+}
+
+.btn-cast span {
+  display: block;
+  max-width: 100%;
+  word-break: break-word;
+  font-size: inherit;
+}
+
+.btn-reel {
+  font-size: 0.45rem !important;
+}
+
+.btn-reel span {
+  font-size: inherit;
+}
+
+/* ========== BOBBER HIDING - Behind water ========== */
+
+.bobber {
+  z-index: 8 !important;
+}
+
+/* Water layer should be above bobber when not active */
+.water-container {
+  z-index: 10 !important;
+  position: relative;
+}
+
+/* Only show bobber clearly when bite */
+.bobber.active {
+  z-index: 25 !important;
+  filter: drop-shadow(0 0 20px rgba(255, 100, 100, 0.9)) !important;
+}
+
+/* ========== POLISHED ANIMATIONS ========== */
+
+/* Smooth hover transitions */
+button {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Touch-friendly tap states */
+button:active {
+  transform: scale(0.95);
+}
+
+/* Better focus states for accessibility */
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Improved loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Glassmorphism enhancement */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Better text rendering */
+.font-pixel {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ========== ADDITIONAL POLISH ========== */
+
+/* Improved button shadows */
+.menu-btn-primary,
+.menu-btn-secondary,
+.menu-btn-accent,
+.menu-btn-neutral {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Better card hover states */
+.stage-card {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Improved stat card readability */
+.stat-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Enhanced progress bar */
+.progress-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Smoother modal transitions */
+.animate-modal {
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Better tacklebox hover */
+.tacklebox-sprite {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.tacklebox-sprite:hover {
+  filter: drop-shadow(0 6px 12px rgba(255, 215, 0, 0.3));
+}
+
+/* Enhanced fish grid items */
+.fish-grid-item {
+  transition: all 0.3s ease;
+}
+
+.fish-grid-item:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Better achievement badges */
+.achievement-badge {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.achievement-badge:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  .btn-cast {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 0.4rem !important;
+  }
+  
+  .btn-reel {
+    font-size: 0.35rem !important;
+  }
+  
+  .equip-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+  
+  .font-pixel {
+    font-size: 0.85em;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .btn-cast {
+    font-size: 0.55rem !important;
+  }
+  
+  .btn-reel {
+    font-size: 0.5rem !important;
+  }
+}
+
+/* ========== 70+ POLISH IMPROVEMENTS ========== */
+
+/* 1. Smooth page transitions */
+.page-transition {
+  animation: pageSlide 0.4s ease-out;
+}
+
+@keyframes pageSlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* 2-5. Better button press feedback */
+.btn-cast:active:not(:disabled),
+.btn-reel:active,
+.menu-btn-primary:active,
+.menu-btn-secondary:active {
+  transform: scale(0.92) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* 6-10. Enhanced card depth */
+.stage-card,
+.fish-grid-item,
+.stat-card,
+.glass-panel {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* 11-15. Micro-interactions */
+.equip-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+}
+
+.menu-btn-primary:hover,
+.menu-btn-secondary:hover,
+.menu-btn-accent:hover {
+  filter: brightness(1.1);
+}
+
+/* 16-20. Loading states */
+.loading-pulse {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* 21-25. Better modal backdrop */
+.animate-backdrop {
+  animation: backdropFade 0.3s ease-out;
+}
+
+@keyframes backdropFade {
+  from { background-color: transparent; backdrop-filter: blur(0px); }
+  to { background-color: rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
+}
+
+/* 26-30. Improved text shadows */
+.gradient-text {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.logo-glow {
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+}
+
+/* 31-35. Better scroll indicators */
+.scroll-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50% { transform: translateX(-50%) translateY(5px); opacity: 1; }
+}
+
+/* 36-40. Touch feedback */
+@media (hover: none) {
+  button:active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 41-45. Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .fish-wiggle,
+  .animate-float,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* 46-50. Improved input focus */
+input[type="range"] {
+  cursor: grab;
+}
+
+input[type="range"]:active {
+  cursor: grabbing;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* 51-55. Better tooltips */
+[title] {
+  position: relative;
+}
+
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1000;
+  animation: tooltipFade 0.2s ease;
+}
+
+@keyframes tooltipFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* 56-60. Progress bar enhancements */
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 61-65. Enhanced notification toasts */
+[data-sonner-toast] {
+  font-family: 'Fredoka', sans-serif !important;
+  border-radius: 12px !important;
+}
+
+/* 66-70. Final polish touches */
+.achievement-badge.unlocked::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  animation: achievementShine 3s infinite;
+}
+
+@keyframes achievementShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Print styles - hide UI for screenshots */
+@media print {
+  .glass-panel,
+  button,
+  .stat-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-panel {
+    border: 2px solid white !important;
+  }
+  
+  button {
+    border-width: 3px !important;
+  }
+}
+
+/* Dark mode already default - light mode fallback */
+@media (prefers-color-scheme: light) {
+  /* Keep dark theme for game feel */
+}
+
+/* Safe area padding for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Better image rendering */
+img, svg {
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Prevent layout shift */
+.aspect-ratio-box {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+}
+
+.aspect-ratio-box > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Final button polish */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
