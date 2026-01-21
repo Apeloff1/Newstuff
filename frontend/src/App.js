@@ -31,6 +31,9 @@ import { AchievementUnlockAnimation, AchievementList } from './components/Achiev
 import EnhancedLeaderboard from './components/EnhancedLeaderboard';
 import CraftingSystem from './components/CraftingSystem';
 import EventsSystem from './components/EventsSystem';
+import { MiniMusicPlayer, MusicPlayerModal } from './components/MusicPlayer';
+import { MobileHUD, TouchTutorial } from './components/TouchControls';
+import { isMobile, isTouchDevice } from './lib/touchEngine';
 import { toast, Toaster } from 'sonner';
 import './App.css';
 
