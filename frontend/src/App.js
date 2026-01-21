@@ -1049,6 +1049,11 @@ function App() {
             purchasedItems={purchasedItems}
           />
         )}
+        
+        {/* Aquarium Modal */}
+        {showAquarium && (
+          <AquariumView onClose={() => setShowAquarium(false)} />
+        )}
       </div>
     );
   }
