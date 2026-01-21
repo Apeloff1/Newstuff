@@ -1184,6 +1184,21 @@ function App() {
             onComplete={() => setAchievementToShow(null)}
           />
         )}
+        
+        {/* Enhanced Leaderboard Modal */}
+        {showEnhancedLeaderboard && (
+          <EnhancedLeaderboard onClose={() => setShowEnhancedLeaderboard(false)} />
+        )}
+        
+        {/* Crafting System Modal */}
+        {showCrafting && (
+          <CraftingSystem onClose={() => setShowCrafting(false)} />
+        )}
+        
+        {/* Events System Modal */}
+        {showEvents && (
+          <EventsSystem onClose={() => setShowEvents(false)} />
+        )}
       </div>
     );
   }
