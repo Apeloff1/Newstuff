@@ -363,6 +363,7 @@ function App() {
   const [showTutorial, setShowTutorial] = useState(false);
   const [showFishdex, setShowFishdex] = useState(false);
   const [showExpansionShop, setShowExpansionShop] = useState(false);
+  const [showAquarium, setShowAquarium] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState({});
   const [fishingSkills, setFishingSkills] = useState({
     casting: 0,
