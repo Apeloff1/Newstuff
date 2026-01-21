@@ -1093,31 +1093,6 @@ function App() {
             </div>
           </div>
         )}
-
-        {/* Achievements Modal */}
-        {showAchievements && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-backdrop bg-black/80">
-            <div className="glass-panel rounded-3xl p-6 w-full max-w-md max-h-[80vh] overflow-auto animate-modal border-2 border-purple-500/30">
-              <h2 className="text-2xl font-bold text-center mb-6 gradient-text font-pixel">⭐ ACHIEVEMENTS</h2>
-              <div className="grid grid-cols-4 gap-3">
-                {ACHIEVEMENTS.map((ach) => (
-                  <div key={ach.id} 
-                    className={`achievement-badge ${store.achievements.includes(ach.id) ? 'unlocked' : 'locked'}`} 
-                    title={ach.description}>
-                    <span className="text-2xl">{ach.icon}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-center text-blue-300/60 mt-6 text-sm">
-                {store.achievements.length} / {ACHIEVEMENTS.length} Unlocked
-              </p>
-              <button onClick={() => setShowAchievements(false)} 
-                className="w-full mt-4 py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl font-bold text-white border-2 border-red-400">
-                CLOSE
-              </button>
-            </div>
-          </div>
-        )}
         
         {/* Expansion Shop Modal */}
         {showExpansionShop && (
