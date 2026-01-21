@@ -875,7 +875,7 @@ function App() {
             </button>
             
             <button 
-              onClick={() => { retroSounds.select(); loadLeaderboard(); setShowLeaderboard(true); }}
+              onClick={() => { retroSounds.select(); setShowEnhancedLeaderboard(true); }}
               className="menu-btn-secondary w-full h-12 rounded-2xl font-bold text-white text-sm flex items-center justify-center gap-2"
               data-testid="leaderboard-button"
             >
