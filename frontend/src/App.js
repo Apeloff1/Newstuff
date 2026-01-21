@@ -25,6 +25,9 @@ import AquariumView from './components/AquariumView';
 import FishBreedingLab from './components/FishBreedingLab';
 import SkillTree from './components/SkillTree';
 import DailyLoginRewards from './components/DailyLoginRewards';
+import MiniGamesLauncher from './components/MiniGames';
+import WeatherWidget from './components/WeatherWidget';
+import { AchievementUnlockAnimation, AchievementList } from './components/AchievementSystem';
 import { toast, Toaster } from 'sonner';
 import './App.css';
 
