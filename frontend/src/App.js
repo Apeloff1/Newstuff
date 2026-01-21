@@ -989,6 +989,30 @@ function App() {
                 <span>TROPHIES</span>
               </button>
             </div>
+            
+            {/* Third row of feature buttons */}
+            <div className="flex gap-2 mt-2">
+              {/* CRAFTING */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowCrafting(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 border-2 border-orange-400/50 shadow-lg transition-all"
+                data-testid="crafting-button"
+              >
+                <span className="text-lg">⚒️</span>
+                <span>CRAFT</span>
+              </button>
+              
+              {/* EVENTS */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowEvents(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 border-2 border-pink-400/50 shadow-lg transition-all animate-pulse"
+                data-testid="events-button"
+              >
+                <span className="text-lg">🎉</span>
+                <span>EVENTS</span>
+                <span className="text-[8px] bg-red-500 px-1 rounded">LIVE</span>
+              </button>
+            </div>
           </div>
           
           {/* Stats Banner */}
