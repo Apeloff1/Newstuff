@@ -1093,6 +1093,21 @@ function App() {
         {showAquarium && (
           <AquariumView onClose={() => setShowAquarium(false)} />
         )}
+        
+        {/* Breeding Lab Modal */}
+        {showBreedingLab && (
+          <FishBreedingLab onClose={() => setShowBreedingLab(false)} />
+        )}
+        
+        {/* Skill Tree Modal */}
+        {showSkillTree && (
+          <SkillTree onClose={() => setShowSkillTree(false)} />
+        )}
+        
+        {/* Daily Rewards Modal */}
+        {showDailyRewards && (
+          <DailyLoginRewards onClose={() => setShowDailyRewards(false)} />
+        )}
       </div>
     );
   }
