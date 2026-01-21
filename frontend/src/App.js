@@ -385,6 +385,10 @@ function App() {
   const [showEnhancedLeaderboard, setShowEnhancedLeaderboard] = useState(false);
   const [showCrafting, setShowCrafting] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
+  const [showMusicPlayer, setShowMusicPlayer] = useState(false);
+  const [showTouchTutorial, setShowTouchTutorial] = useState(false);
+  const [touchTutorialStep, setTouchTutorialStep] = useState(0);
+  const [isMobileDevice] = useState(() => isMobile() || isTouchDevice());
   const [purchasedItems, setPurchasedItems] = useState({});
   const [fishingSkills, setFishingSkills] = useState({
     casting: 0,
