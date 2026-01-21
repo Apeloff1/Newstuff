@@ -375,7 +375,6 @@ function App() {
   const [showDailyRewards, setShowDailyRewards] = useState(false);
   const [showMiniGames, setShowMiniGames] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
-  const [showAchievements, setShowAchievements] = useState(false);
   const [achievementToShow, setAchievementToShow] = useState(null);
   const [purchasedItems, setPurchasedItems] = useState({});
   const [fishingSkills, setFishingSkills] = useState({
