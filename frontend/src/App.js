@@ -367,6 +367,9 @@ function App() {
   const [showFishdex, setShowFishdex] = useState(false);
   const [showExpansionShop, setShowExpansionShop] = useState(false);
   const [showAquarium, setShowAquarium] = useState(false);
+  const [showBreedingLab, setShowBreedingLab] = useState(false);
+  const [showSkillTree, setShowSkillTree] = useState(false);
+  const [showDailyRewards, setShowDailyRewards] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState({});
   const [fishingSkills, setFishingSkills] = useState({
     casting: 0,
