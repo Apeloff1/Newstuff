@@ -379,6 +379,9 @@ function App() {
   const [showMiniGames, setShowMiniGames] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
   const [achievementToShow, setAchievementToShow] = useState(null);
+  const [showEnhancedLeaderboard, setShowEnhancedLeaderboard] = useState(false);
+  const [showCrafting, setShowCrafting] = useState(false);
+  const [showEvents, setShowEvents] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState({});
   const [fishingSkills, setFishingSkills] = useState({
     casting: 0,
