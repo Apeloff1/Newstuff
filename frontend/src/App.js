@@ -911,6 +911,39 @@ function App() {
               <span className="text-xl">🐠</span>
               <span>AQUARIUM</span>
             </button>
+            
+            {/* Additional Feature Buttons Row */}
+            <div className="flex gap-2 mt-2">
+              {/* BREEDING LAB */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowBreedingLab(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border-2 border-purple-400/50 shadow-lg transition-all"
+                data-testid="breeding-lab-button"
+              >
+                <span className="text-lg">🧬</span>
+                <span>BREEDING</span>
+              </button>
+              
+              {/* SKILL TREE */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowSkillTree(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 border-2 border-indigo-400/50 shadow-lg transition-all"
+                data-testid="skill-tree-button"
+              >
+                <span className="text-lg">🌳</span>
+                <span>SKILLS</span>
+              </button>
+              
+              {/* DAILY REWARDS */}
+              <button 
+                onClick={() => { retroSounds.select(); setShowDailyRewards(true); }}
+                className="flex-1 h-12 rounded-xl font-bold text-white text-xs flex items-center justify-center gap-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 border-2 border-amber-400/50 shadow-lg transition-all animate-pulse"
+                data-testid="daily-rewards-button"
+              >
+                <span className="text-lg">🎁</span>
+                <span>DAILY</span>
+              </button>
+            </div>
           </div>
           
           {/* Stats Banner */}
