@@ -22,6 +22,9 @@ import {
 import FishCatchCutscene from './components/FishCatchCutscene';
 import ExpansionShop from './components/ExpansionShop';
 import AquariumView from './components/AquariumView';
+import FishBreedingLab from './components/FishBreedingLab';
+import SkillTree from './components/SkillTree';
+import DailyLoginRewards from './components/DailyLoginRewards';
 import { toast, Toaster } from 'sonner';
 import './App.css';
 
